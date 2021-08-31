@@ -1,18 +1,18 @@
-namespace GameManager.WebAPI.Migrations
+namespace GameManager.Data.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<GameManager.WebAPI.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<GameManager.Data.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(GameManager.WebAPI.Models.ApplicationDbContext context)
+        protected override void Seed(GameManager.Data.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
