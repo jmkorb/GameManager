@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using GameManager.WebAPI.Models;
 using GameManager.WebAPI.Providers;
 using GameManager.WebAPI.Results;
+using GameManager.Data;
 
 namespace GameManager.WebAPI.Controllers
 {
