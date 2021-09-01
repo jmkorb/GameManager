@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameManager.Data\GameManager.Data.csproj">
-      <Project>{4d2e8ea3-c819-4438-9b0a-a84916fa64b5}</Project>
+      <Project>{4D2E8EA3-C819-4438-9B0A-A84916FA64B5}</Project>
       <Name>GameManager.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\GameManager.Models\GameManager.Models.csproj">

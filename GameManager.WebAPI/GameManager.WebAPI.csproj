@@ -206,6 +206,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\GameControllers\GameController.cs" />
     <Compile Include="Controllers\GameSystemControllers\GameSystemController.cs" />
     <Compile Include="Controllers\GenreControllers\GenreController.cs" />
@@ -316,6 +317,14 @@
     <ProjectReference Include="..\GameManager.Data\GameManager.Data.csproj">
       <Project>{4D2E8EA3-C819-4438-9B0A-A84916FA64B5}</Project>
       <Name>GameManager.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameManager.Models\GameManager.Models.csproj">
+      <Project>{6404F8DF-0AD5-4E21-A5E6-CA540615F08F}</Project>
+      <Name>GameManager.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameManager.Services\GameManager.Services.csproj">
+      <Project>{8FD7AA3C-A69D-495F-B3A8-0051370F9719}</Project>
+      <Name>GameManager.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

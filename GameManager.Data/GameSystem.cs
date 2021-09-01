@@ -13,6 +13,7 @@ namespace GameManager.Data
         [Key]
         [Required]
         public int Id { get; set; }
+        public Guid OwnerId { get; set; }
         [Required]
         public string Name { get; set; }
         public DateTime YearOfRelease { get; set; }
