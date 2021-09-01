@@ -8,7 +8,6 @@ namespace GameManager.Models.GenreModels
 {
     public class GenreCreate
     {
-        public int Id { get; set; }
         public string GenreType { get; set; }
         public string Description { get; set; }
     }
