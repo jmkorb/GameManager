@@ -10,9 +10,5 @@ namespace GameManager.Models.GenreModels
     {
         public int Id { get; set; }
         public string GenreType { get; set; }
-        public override string ToString()
-        {
-            return base.ToString();
-        }
     }
 }
