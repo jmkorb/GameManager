@@ -18,7 +18,7 @@ namespace GameManager.Services.GenreServices
             _genreId = genreId;
         }
 
-        public async Task<bool> Post(GenreCreate genre)
+        public async Task<bool> CreateGenre(GenreCreate genre)
         {
             var entity = new Genre
             { 
@@ -74,6 +74,38 @@ namespace GameManager.Services.GenreServices
                     Description = genre.Description
                 };
             }
-        } 
+        }
+        
+        public async Task<bool> Update(GenreEdit genre, int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var oldGenreData = await ctx.Genres.FindAsync(id);
+                if(oldGenreData is null)
+                {
+                    return false;
+                }
+                oldGenreData.Id = genre.Id;
+                oldGenreData.GenreType = genre.GenreType;
+                oldGenreData.Description = genre.Description;
+
+                return await ctx.SaveChangesAsync() > 0;
+            }
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var oldGenreData = await ctx.Genres.FindAsync(id);
+                if (oldGenreData is null)
+                {
+                    return false;
+                }
+
+                ctx.Genres.Remove(oldGenreData);
+                return await ctx.SaveChangesAsync() > 0;
+            }
+        }
     }
 }
