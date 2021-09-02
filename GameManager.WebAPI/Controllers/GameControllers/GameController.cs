@@ -39,7 +39,7 @@ namespace GameManager.WebAPI.Controllers.GameControllers
 
             return Ok();
         }
-        public IHttpActionResult Post(GameEdit game)
+        public IHttpActionResult Put(GameEdit game)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
