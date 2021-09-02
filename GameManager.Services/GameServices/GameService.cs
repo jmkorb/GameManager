@@ -10,7 +10,7 @@ namespace GameManager.Services
 {
     public class GameService
     {
-        {
+        
         private readonly int _userId;
 
         public GameService(int userId)
@@ -34,10 +34,87 @@ namespace GameManager.Services
                 };
             using (var ctx = new ApplicationDbContext())
             {
+                ctx.Games.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public IEnumerable<GameListDetail> GetGames()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx.Games
+                        .Where(g => g.Id == _userId)
+                        .Select(
+                        g =>
+                            new GameListDetail
+                            {
+                                Id = g.Id,
+                                Title = g.Title,
+                                YearOfRelease = g.YearOfRelease,
+                                Genre = g.Genre,
+                                IfPlayed = g.IfPlayed,
+                                Rating = g.Rating,
+                                GameSystem = g.GameSystem
+                            }
+                                );
+                return query.ToArray();
+            }
+        }
+        public GameDetail GetGameById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Games
+                    .Single(g => g.Id == id && g.Id == _userId);
+                return
+                    new GameDetail
+                    {
+                        Id = entity.Id,
+                        Title = entity.Title,
+                        Description = entity.Description,
+                        YearOfRelease = entity.YearOfRelease,
+                        Genre = entity.Genre,
+                        IfPlayed = entity.IfPlayed,
+                        Rating = entity.Rating,
+                        GameSystem = entity.GameSystem
 
+                    };
+            }
+        }
+        public bool UpdateGame(GameEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Games
+                    .Single(g => g.Id == model.Id && g.Id == _userId);
+                entity.Id = model.Id;
+                entity.Title = model.Title;
+                entity.Description = model.Description;
+                entity.YearOfRelease = model.YearOfRelease;
+                entity.Genre = model.Genre;
+                entity.IfPlayed = model.IfPlayed;
+                entity.Rating = model.Rating;
+                entity.GameSystem = model.GameSystem;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool DeleteGame(int gameId)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Games
+                    .Single(g => g.Id == gameId && g.Id == _userId);
+                ctx.Games.Remove(entity);
+                return ctx.SaveChanges() == 1;
             }
         }
     }
 }
     
-}
+
