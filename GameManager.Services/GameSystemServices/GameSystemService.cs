@@ -10,12 +10,6 @@ namespace GameManager.Services.GameSystemServices
 {
     public class GameSystemService
     {
-        private readonly Guid _userId;
-
-        public GameSystemService(Guid userId)
-        {
-            _userId = userId;
-        }
         public bool CreateGameSystem(GameSystemCreate gameSystemModel)
         {
             var entity =
@@ -23,13 +17,13 @@ namespace GameManager.Services.GameSystemServices
                 {
                     Id = gameSystemModel.Id,
                     Name = gameSystemModel.Name,
-                    YearOfRelease = DateTime.Now,
+                    YearOfRelease = DateTime.Now
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.GameSystems.Add(entity);
-                return ctx.SaveChanges() > 0;
+                return ctx.SaveChanges() == 1;
             }
         }
 
@@ -45,7 +39,8 @@ namespace GameManager.Services.GameSystemServices
                             new GameSystemListDetail
                             {
                                 Id = g.Id,
-                                Name = g.Name
+                                Name = g.Name,
+                                YearOfRelease = g.YearOfRelease
                             });
 
                 return query.ToArray();
@@ -59,7 +54,7 @@ namespace GameManager.Services.GameSystemServices
                 var entity =
                     ctx
                         .GameSystems
-                        .Single(g => g.Id == id && g.OwnerId == _userId);
+                        .Single(g => g.Id == id);
                 return
                     new GameSystemDetail
                     {
@@ -77,10 +72,11 @@ namespace GameManager.Services.GameSystemServices
                 var entity =
                     ctx
                         .GameSystems
-                        .Single(g => g.Id == gameSystemModel.Id && g.OwnerId == _userId);
+                        .Single(g => g.Id == gameSystemModel.Id);
 
                 entity.Id = gameSystemModel.Id;
                 entity.Name = gameSystemModel.Name;
+                entity.YearOfRelease = gameSystemModel.YearOfRelease;
 
                 return ctx.SaveChanges() > 0;
             }
@@ -93,7 +89,7 @@ namespace GameManager.Services.GameSystemServices
                 var entity =
                     ctx
                         .GameSystems
-                        .SingleOrDefault(g => g.Id == id && g.OwnerId == _userId);
+                        .SingleOrDefault(g => g.Id == id);
 
                 ctx.GameSystems.Remove(entity);
 

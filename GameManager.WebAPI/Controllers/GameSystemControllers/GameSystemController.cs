@@ -35,13 +35,6 @@ namespace GameManager.WebAPI.Controllers.GameSystemControllers
             return Ok();
         }
 
-        private GameSystemService CreateGameSystemService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var gameSystemService = new GameSystemService(userId);
-            return gameSystemService;
-        }
-
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -73,6 +66,12 @@ namespace GameManager.WebAPI.Controllers.GameSystemControllers
                 return InternalServerError();
 
             return Ok();
+        }
+
+        private GameSystemService CreateGameSystemService()
+        {
+            var gameSystemService = new GameSystemService();
+            return gameSystemService;
         }
     }
 }
