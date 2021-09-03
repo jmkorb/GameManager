@@ -60,8 +60,8 @@ namespace GameManager.WebAPI.Controllers.GameControllers
         }
         private GameService CreateGameService()
         {
-            var userId = int.Parse(User.Identity.GetUserId());
-            var gameService = new GameService(userId);
+
+            var gameService = new GameService();
             return gameService;
         }
     }
