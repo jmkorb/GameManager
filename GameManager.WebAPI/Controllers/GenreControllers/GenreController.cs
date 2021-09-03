@@ -15,8 +15,7 @@ namespace GameManager.WebAPI.Controllers.GenreControllers
     {
         private GenreService CreateGenreService()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var svc = new GenreService(userId);
+            var svc = new GenreService();
             return svc;
         }
 
