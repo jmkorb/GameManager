@@ -11,13 +11,6 @@ namespace GameManager.Services.GenreServices
 {
     public class GenreService
     {
-        private readonly Guid _genreId;
-
-        public GenreService(Guid genreId)
-        {
-            _genreId = genreId;
-        }
-
         public async Task<bool> CreateGenre(GenreCreate genre)
         {
             var entity = new Genre
@@ -59,8 +52,6 @@ namespace GameManager.Services.GenreServices
                     await
                     ctx
                     .Genres
-                    .Include(g => g.GenreType)
-                    .Include(g => g.Description)
                     .SingleOrDefaultAsync(g => g.Id == id);
                 if(genre is null)
                 {
