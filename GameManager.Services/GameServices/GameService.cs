@@ -10,20 +10,12 @@ namespace GameManager.Services
 {
     public class GameService
     {
-        
-        private readonly int _userId;
-
-        public GameService(int userId)
-        {
-            _userId = userId;
-        }
-
         public bool CreateGame(GameCreate model)
         {
             var entity =
                 new Game()
                 {
-                    Id = _userId,
+                    Id = model.Id,
                     Title = model.Title,
                     Description = model.Description,
                     YearOfRelease = model.YearOfRelease,
@@ -44,7 +36,7 @@ namespace GameManager.Services
             {
                 var query =
                     ctx.Games
-                        .Where(g => g.Id == _userId)
+                        
                         .Select(
                         g =>
                             new GameListDetail
@@ -67,7 +59,7 @@ namespace GameManager.Services
             {
                 var entity =
                     ctx.Games
-                    .Single(g => g.Id == id && g.Id == _userId);
+                    .Single(g => g.Id == id);
                 return
                     new GameDetail
                     {
@@ -90,7 +82,7 @@ namespace GameManager.Services
                 var entity =
                     ctx
                     .Games
-                    .Single(g => g.Id == model.Id && g.Id == _userId);
+                    .Single(g => g.Id == model.Id);
                 entity.Id = model.Id;
                 entity.Title = model.Title;
                 entity.Description = model.Description;
@@ -109,7 +101,7 @@ namespace GameManager.Services
             {
                 var entity =
                     ctx.Games
-                    .Single(g => g.Id == gameId && g.Id == _userId);
+                    .Single(g => g.Id == gameId);
                 ctx.Games.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

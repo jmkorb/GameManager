@@ -39,7 +39,7 @@ namespace GameManager.WebAPI.Controllers.GameControllers
 
             return Ok();
         }
-        public IHttpActionResult Post(GameEdit game)
+        public IHttpActionResult Put(GameEdit game)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -60,8 +60,8 @@ namespace GameManager.WebAPI.Controllers.GameControllers
         }
         private GameService CreateGameService()
         {
-            var userId = int.Parse(User.Identity.GetUserId());
-            var gameService = new GameService(userId);
+
+            var gameService = new GameService();
             return gameService;
         }
     }
